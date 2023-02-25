@@ -7,7 +7,7 @@ module.exports = {
   overrides: [
     {
       extends: ["xo-typescript", "prettier"],
-      files: ["*.ts", "*.tsx"],
+      files: [".ts", ".tsx"],
       rules: {
         "@typescript-eslint/consistent-type-definitions": [
           "error",
@@ -16,13 +16,17 @@ module.exports = {
       },
     },
     {
-      files: ["src/**/models/**/*.ts"],
+      files: ["src//models//*.ts"],
       rules: { "@typescript-eslint/naming-convention": "off" },
+      newIsCap: false,
     },
   ],
   parserOptions: {
     ecmaVersion: "latest",
     sourceType: "module",
   },
-  rules: { "no-implicit-coercion": "off" },
+  rules: {
+    "new-cap": ["error", { capIsNewExceptions: ["Router"] }],
+    "no-implicit-coercion": "off",
+  },
 };

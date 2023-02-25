@@ -5,7 +5,7 @@ import connectDataBase from "./database/connectDatabase.js";
 import mongoose from "mongoose";
 import chalk from "chalk";
 
-export const debug = createDebug("robots:*");
+export const debug = createDebug("users:*");
 
 const port = process.env.PORT ?? 4000;
 const mongoDdUrl = process.env.MONGODB_CONNECTION_URL;
@@ -21,11 +21,9 @@ mongoose.set("toJSON", {
 try {
   await connectDataBase(mongoDdUrl!);
   debug(chalk.green("Connected to data base"));
-  console.log("This is connected");
 
   await startServer(+port);
   debug(chalk.green(`Server listening on port ${port}`));
-  console.log("Working in port 4000");
 } catch (error) {
   debug(error.message);
 }

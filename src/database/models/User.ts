@@ -11,6 +11,8 @@ const userSchema = new Schema({
   password: {
     type: String,
     required: true,
+    unique: true,
+    minLength: 8,
   },
   avatar: {
     type: Object,
@@ -18,14 +20,11 @@ const userSchema = new Schema({
   email: {
     type: String,
   },
-  aboutme: {
+  aboutMe: {
     type: String,
   },
-  relationships: {
-    type: Object,
-    friends: { type: Array },
-    foes: { type: Array },
-  },
+  friends: [{ type: Schema.Types.ObjectId, ref: "userSchema" }],
+  foes: [{ type: Schema.Types.ObjectId, ref: "userSchema" }],
 });
 
 const User = model("User", userSchema, "users");
