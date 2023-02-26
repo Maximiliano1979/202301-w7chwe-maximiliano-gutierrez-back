@@ -25,12 +25,8 @@ export const registerUser = async (
   next: NextFunction
 ) => {
   try {
-    const { email, avatar, name, password, username } = req.body;
-
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json(errors);
-    }
+    const { email, name, password, username } = req.body;
+    const avatar = req.file?.originalname;
 
     const hashedPassword = await bcryptjs.hash(password, 10);
 
@@ -42,7 +38,7 @@ export const registerUser = async (
       avatar,
     });
 
-    res.status(201).json(newUser);
+    res.status(201).json({ newUser, message: "The user has been created" });
   } catch (error) {
     const customError = new CustomError(
       (error as Error).message,
