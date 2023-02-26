@@ -9,7 +9,7 @@ export interface UserRegister extends UserCredentials {
   avatar: string;
 }
 
-export interface UserStructure extends UserCredentials {
+export interface UserStructure extends UserRegister {
   avatar: string;
   aboutMe: string;
   friends: [UserCredentials];
